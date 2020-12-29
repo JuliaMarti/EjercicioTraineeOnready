@@ -1,4 +1,3 @@
-
 class Vehiculo{
 
     constructor(marca, modelo, precio){
@@ -106,15 +105,15 @@ const programa = {
     vehiculos: [],
 
     instanciarVehiculos: function(){
-        programa.vehiculos.push(new Auto("Peugeot", "206", 200000.00, 4));
-        programa.vehiculos.push(new Auto("Peugeot", "208", 250000.00, 5));
-        programa.vehiculos.push(new Moto("Honda","Titan", 60000.00, 125));
-        programa.vehiculos.push(new Moto("Yamaha", "YBR", 80500.50, 160));
+        this.vehiculos.push(new Auto("Peugeot", "206", 200000.00, 4));
+        this.vehiculos.push(new Auto("Peugeot", "208", 250000.00, 5));
+        this.vehiculos.push(new Moto("Honda","Titan", 60000.00, 125));
+        this.vehiculos.push(new Moto("Yamaha", "YBR", 80500.50, 160));
     },
 
 
     imprimirDescripciones: function(){
-        programa.vehiculos.forEach(v => v.imprimirDescripcion())
+        this.vehiculos.forEach(v => v.imprimirDescripcion())
     },
 
 
@@ -125,7 +124,7 @@ const programa = {
 
 
     ordenarVehiculosDeMayorAMenorPrecio: function(){
-        programa.vehiculos.sort((v1, v2) => v2.getPrecio() - v1.getPrecio());
+        this.vehiculos.sort((v1, v2) => v2.getPrecio() - v1.getPrecio());
     },
 
 
@@ -138,7 +137,7 @@ const programa = {
 
 
     imprimirVehiculoMasBarato: function(){
-        const indice = programa.vehiculos.length - 1 ;
+        const indice = this.vehiculos.length - 1 ;
         const vehiculo = programa.vehiculos[indice];
         const elMasBarato = `Vehículo más barato: ${vehiculo.imprimirMarcaModelo()}`;
         console.log(elMasBarato);
@@ -146,7 +145,7 @@ const programa = {
 
 
     imprimirVehiculoConYEnModelo: function(){
-        const vehiculo = programa.vehiculos.find(v => (v.getModelo().includes('Y')));
+        const vehiculo = this.vehiculos.find(v => (v.getModelo().includes('Y')));
         const elQueContieneY = `Vehículo que contiene en el modelo la letra ‘Y’: ${vehiculo.imprimirMarcaModelo()} ${vehiculo.precioFormateado()}`;
         console.log(elQueContieneY);
 
@@ -155,29 +154,33 @@ const programa = {
 
     imprimirVehiculosMayorAMenorPrecio: function(){
         console.log('Vehículos ordenados por precio de mayor a menor:')
-        programa.vehiculos.forEach(vehiculo => {
+        this.vehiculos.forEach(vehiculo => {
             console.log(vehiculo.imprimirMarcaModelo());
         });
+    },
+
+    programaIniciar: function(){
+        this.instanciarVehiculos();
+
+        this.imprimirDescripciones();
+
+        this.imprimirSeparador();
+
+        this.ordenarVehiculosDeMayorAMenorPrecio();
+
+        this.imprimirVehiculoMasCaro();
+
+        this.imprimirVehiculoMasBarato();
+
+        this.imprimirVehiculoConYEnModelo();
+
+        this.imprimirSeparador();
+
+        this.imprimirVehiculosMayorAMenorPrecio();
     }
 
 
 }
 
 
-programa.instanciarVehiculos();
-
-programa.imprimirDescripciones();
-
-programa.imprimirSeparador();
-
-programa.ordenarVehiculosDeMayorAMenorPrecio();
-
-programa.imprimirVehiculoMasCaro();
-
-programa.imprimirVehiculoMasBarato();
-
-programa.imprimirVehiculoConYEnModelo();
-
-programa.imprimirSeparador();
-
-programa.imprimirVehiculosMayorAMenorPrecio();
+programa.programaIniciar()
